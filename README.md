@@ -6,11 +6,6 @@
   <img src="https://img.shields.io/badge/Docker-Supported-blue?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
 </p>
 
-<p align="center">
-  <a href="#-繁體中文">繁體中文</a> •
-  <a href="#-english">English</a>
-</p>
-
 ---
 
 ## 繁體中文
