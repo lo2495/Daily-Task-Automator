@@ -1,0 +1,10 @@
+services:
+  selenium-chrome-standalone:
+    image: selenium/standalone-chrome:latest
+    container_name: selenium-chrome-standalone
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: '2gb'
+    volumes:
+      - .:/home/seluser/project
