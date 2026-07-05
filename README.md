@@ -11,7 +11,7 @@
 ## 繁體中文
 
 ### 📌 目的
-為了解決因日常疏忽遺忘簽到而錯失平台獎勵的問題。透過自動化腳本，系統能校對並補全每日福利任務，確保所有獎勵領取不漏接。
+這次專案以 BlablaLink 為首要測試對象，為了解決因日常疏忽遺忘簽到而錯失平台獎勵的問題。透過自動化腳本，系統能校對並補全每日福利任務，確保所有獎勵領取不漏接。
 
 ### 🛠️ 系統架構與需求
 * **核心語言**：Python 3.10+。
@@ -20,9 +20,12 @@
 * **憑證導出**：需於瀏覽器安裝 Chrome 插件（如 Cookie-Editor 或 EditThisCookie）用以導出 `cookies.json`。
 
 ### 📁 檔案說明
-* `daily_checkin.py`：主自動化執行程式。
-* `requirements.txt`：Python 套件清單。
-* `DockerFile` & `docker-compose.yml`：Docker 容器部署設定檔。
+* `main.py`：主程式。
+* `browser_manager.py`：瀏覽器設置。
+* `bot_tasks.py`：任務流程。
+* `config.py`：路徑與環境變數設定。
+* `notifier.py`：Discord 通知系統。
+* `locators.py`：網頁元素 XPath 定義。
 
 ### 🚀 部署方式
 
@@ -50,7 +53,7 @@
 ## English
 
 ### 📌 Purpose
-This project is designed to prevent users from missing out on daily platform rewards due to oversight or forgetting to check in manually. Through this automation script, the system verifies and completes daily tasks to ensure no rewards are missed.
+This project takes BlablaLink as the primary test subject. This project is designed to prevent users from missing out on daily platform rewards due to oversight or forgetting to check in manually. Through this automation script, the system verifies and completes daily tasks to ensure no rewards are missed.
 
 ### 🛠️ System Architecture & Requirements
 * **Core Language**: Python 3.10+.
@@ -59,9 +62,12 @@ This project is designed to prevent users from missing out on daily platform rew
 * **Credential Export**: Requires a Chrome extension (e.g., Cookie-Editor or EditThisCookie) to export `cookies.json` for passwordless authentication.
 
 ### 📁 File Structure
-* `daily_checkin.py`: The main automation script.
-* `requirements.txt`: List of Python dependencies.
-* `DockerFile` & `docker-compose.yml`: Configuration files for Docker containerization.
+* `main.py`：Main Function
+* `browser_manager.py`：Driver management & Cookie loading
+* `bot_tasks.py`：Task definitions
+* `config.py`：Path and environment configurations
+* `notifier.py`：Discord notification system
+* `locators.py`：XPath definitions
 
 ### 🚀 Deployment
 
