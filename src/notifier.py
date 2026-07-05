@@ -1,10 +1,11 @@
 import json
 import urllib.request
+import logging
 from config import DISCORD_WEBHOOK_URL
 
 def send_discord_message(content):
-    if not DISCORD_WEBHOOK_URL in DISCORD_WEBHOOK_URL:
-        print("未設定正確的 Discord Webhook 網址。")
+    if not DISCORD_WEBHOOK_URL or "discord.com/api/webhooks" not in DISCORD_WEBHOOK_URL:
+        logging.error("未設定正確的 Discord Webhook 網址。")
         return
     
     payload = {"content": content}
@@ -17,6 +18,6 @@ def send_discord_message(content):
     try:
         with urllib.request.urlopen(req) as response:
             if response.status == 204:
-                print("發送成功！")
+                logging.info("Discord 訊息發送成功！")
     except Exception as e:
-        print(f"❌ 無法發送通知: {e}")
+        logging.error(f"❌ 無法發送通知: {e}")
