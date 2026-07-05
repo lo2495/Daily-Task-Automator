@@ -1,10 +1,16 @@
 import json
 import time
+import os
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
+from notifier import send_discord_message
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.dirname(current_dir)
+COOKIE_FILE_PATH = os.path.join(root_dir, "cookies.json")
 
 def load_cookies(driver, filepath):
     with open(filepath, 'r') as f:
@@ -47,7 +53,7 @@ def run():
     try:
         driver.get("https://www.blablalink.com/?lang=zh-TW")
         time.sleep(3) 
-        load_cookies(driver, "cookies.json")
+        load_cookies(driver, COOKIE_FILE_PATH)
         driver.refresh()
         time.sleep(5) 
         wait = WebDriverWait(driver, 15)
@@ -55,7 +61,6 @@ def run():
         try:
             welfare_tab_xpath = "//div[@data-cname='index']//div[text()='福利任務']/.."
             welfare_tab = wait.until(EC.presence_of_element_located((By.XPATH, welfare_tab_xpath)))
-            
             driver.execute_script("arguments[0].scrollIntoView({inline: 'center', block: 'nearest'});", welfare_tab)
             time.sleep(1.5)
             driver.execute_script("arguments[0].click();", welfare_tab)
@@ -73,9 +78,10 @@ def run():
             like_xpath = "//div[i[contains(@class, 'border-[color:var(--line-1)]')] and .//div[contains(text(), '按讚5個貼文')]]//div[text()='5 / 5']"
             is_like_completed = len(driver.find_elements(By.XPATH, like_xpath)) > 0
             
-            
             if is_signed_in and is_browse_completed and is_like_completed:
-                print("今日所有任務皆已完成。")
+                msg = "🎉 **[BlablaLink 狀態報告]** 今日所有任務皆已完成。"
+                print(msg)
+                send_discord_message(msg)
                 driver.quit()
                 return 
             
@@ -85,13 +91,13 @@ def run():
                     driver.execute_script("arguments[0].click();", checkin_btn_inside)
                     time.sleep(2)
                 except Exception:
-                    print("⚠️ 未找到內部簽到按鈕。")
+                    print("未找到簽到按鈕。")
             
             driver.get("https://www.blablalink.com/?lang=zh-TW")
             time.sleep(4)
             
         except Exception as rollbar_err:
-            print(f"❌ 讀取福利任務進度時發生異常: {rollbar_err}，安全起見，直接切換至常規點讚流程...")
+            print(f"❌ 讀取福利任務進度時發生異常: {rollbar_err}，切換至點讚流程...")
 
         tongren_tab = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='同人']")))
         tongren_tab.click()
@@ -144,12 +150,17 @@ def run():
             post_index += 1
             
         if liked_count >= 5:
-            print("\n🎉 成功！今日 5 個全新點讚任務已全數達成！")
+            msg = "🎉 **[BlablaLink 狀態報告]** 成功！今日 5 個全新點讚任務已全數達成！"
         else:
-            print(f"\n每日任務結束。今日共查看了 {post_index} 篇貼文，成功點了 {liked_count} 個讚。")
+            msg = f"ℹ️ **[BlablaLink 狀態報告]** 每日任務結束。今日共查看了 {post_index} 篇貼文，成功點了 {liked_count} 個讚。"
+        
+        print(msg)
+        send_discord_message(msg)
         
     except Exception as e:
-        print(f"❌ 主程式發生重大錯誤: {e}")
+        err_msg = f"❌ **[BlablaLink 錯誤報告]** 主程式發生重大錯誤: {e}"
+        print(err_msg)
+        send_discord_message(err_msg)
     finally:
         print("正在關閉瀏覽器...")
         driver.quit()
