@@ -13,6 +13,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY src/ ./src
+COPY cookies.json .
 
-CMD ["python", "src/daily_checkin.py"]
+CMD ["python", "src/main.py"]

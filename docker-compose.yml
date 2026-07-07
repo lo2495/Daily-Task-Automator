@@ -1,10 +1,23 @@
+version: '3.8'
+
 services:
-  selenium-chrome-standalone:
-    image: selenium/standalone-chrome:latest
-    container_name: selenium-chrome-standalone
-    ports:
-      - "4444:4444"
-      - "7900:7900"
+  blablalink-bot:
+    image: ghcr.io/lo2495/Daily-Task-Automator
+    container_name: blablalink-bot
+    restart: always
+    env_file:
+      - .env
     shm_size: '2gb'
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
     volumes:
-      - .:/home/seluser/project
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_LABEL_ENABLE=true
