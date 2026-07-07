@@ -4,7 +4,7 @@ services:
   blablalink-bot:
     image: ghcr.io/lo2495/daily-task-automator:latest 
     container_name: blablalink-bot
-    restart: always
+    restart: no
     env_file:
       - .env
     shm_size: '2gb'
