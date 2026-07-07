@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   blablalink-bot:
-    image: ghcr.io/你的github帳號/你的專案名稱:latest
+    image: ghcr.io/lo2495/daily-task-automator:latest 
     container_name: blablalink-bot
     restart: always
     env_file:
@@ -20,6 +20,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=86400
-      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_CLEANUP=true          
+      - WATCHTOWER_POLL_INTERVAL=86400   
+      - WATCHTOWER_LABEL_ENABLE=true  
