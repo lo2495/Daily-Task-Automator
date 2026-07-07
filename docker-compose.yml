@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   blablalink-bot:
-    image: ghcr.io/lo2495/Daily-Task-Automator
+    image: ghcr.io/你的github帳號/你的專案名稱:latest
     container_name: blablalink-bot
     restart: always
     env_file:
       - .env
     shm_size: '2gb'
+    volumes:
+      - ./cookies.json:/app/cookies.json 
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
