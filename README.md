@@ -10,16 +10,16 @@
 
 ## 繁體中文
 
-### 📌 目的
+### 目的
 這次專案以 BlablaLink 為首要測試對象，為了解決因日常疏忽遺忘簽到而錯失平台獎勵的問題。透過自動化腳本，系統能校對並補全每日福利任務，確保所有獎勵領取不漏接。
 
-### 🛠️ 系統架構與需求
+### 系統架構與需求
 * **核心語言**：Python 3.10+。
 * **自動化工具**：Selenium WebDriver / `undetected-chromedriver`。
 * **瀏覽器**：最新版本 Google Chrome。
 * **憑證導出**：需於瀏覽器安裝 Chrome 插件（如 Cookie-Editor 或 EditThisCookie）用以導出 `cookies.json`。
 
-### 📁 檔案說明
+### 檔案說明
 * `main.py`：主程式。
 * `browser_manager.py`：瀏覽器設置。
 * `bot_tasks.py`：任務流程。
@@ -27,7 +27,7 @@
 * `notifier.py`：Discord 通知系統。
 * `locators.py`：網頁元素 XPath 定義。
 
-### 🚀 部署方式
+### 部署方式
 
 #### 1. Synology NAS 部署
 開發者自身採用 Synology NAS 的 Docker 環境進行全自動化管理：
@@ -52,16 +52,16 @@
 
 ## English
 
-### 📌 Purpose
+### Purpose
 This project takes BlablaLink as the primary test subject. This project is designed to prevent users from missing out on daily platform rewards due to oversight or forgetting to check in manually. Through this automation script, the system verifies and completes daily tasks to ensure no rewards are missed.
 
-### 🛠️ System Architecture & Requirements
+### System Architecture & Requirements
 * **Core Language**: Python 3.10+.
 * **Automation Framework**: Selenium WebDriver / `undetected-chromedriver`.
 * **Browser Environment**: Latest version of Google Chrome.
 * **Credential Export**: Requires a Chrome extension (e.g., Cookie-Editor or EditThisCookie) to export `cookies.json` for passwordless authentication.
 
-### 📁 File Structure
+### File Structure
 * `main.py`：Main Function
 * `browser_manager.py`：Driver management & Cookie loading
 * `bot_tasks.py`：Task definitions
@@ -69,7 +69,7 @@ This project takes BlablaLink as the primary test subject. This project is desig
 * `notifier.py`：Discord notification system
 * `locators.py`：XPath definitions
 
-### 🚀 Deployment
+### Deployment
 
 #### 1. Synology NAS Deployment
 The developer personally utilizes a Docker environment on a Synology NAS for fully automated management:
