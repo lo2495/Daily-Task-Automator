@@ -10,7 +10,7 @@ def run():
         
         try:
             tasks.run_cdk_task()
-        except:
+        except Exception:
             pass
         
         try:

@@ -1,7 +1,8 @@
-import json, os ,time
+import json
+import os
+import time
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from config import COOKIE_FILE_PATH
 
 class BrowserManager:
@@ -38,15 +39,19 @@ class BrowserManager:
                         clean_cookie['domain'] = '.blablalink.com'
                     else:
                         clean_cookie['domain'] = domain
-                    if 'secure' in cookie: clean_cookie['secure'] = cookie['secure']
-                    if 'httpOnly' in cookie: clean_cookie['httpOnly'] = cookie['httpOnly']
-                    if 'expiry' in cookie: clean_cookie['expiry'] = int(cookie['expiry'])
-                    elif 'expirationDate' in cookie: clean_cookie['expiry'] = int(cookie['expirationDate'])
+                    if 'secure' in cookie:
+                        clean_cookie['secure'] = cookie['secure']
+                    if 'httpOnly' in cookie:
+                        clean_cookie['httpOnly'] = cookie['httpOnly']
+                    if 'expiry' in cookie:
+                        clean_cookie['expiry'] = int(cookie['expiry'])
+                    elif 'expirationDate' in cookie:
+                        clean_cookie['expiry'] = int(cookie['expirationDate'])
                     if 'sameSite' in cookie and cookie['sameSite'] in ['Lax', 'Strict', 'None']:
                         clean_cookie['sameSite'] = cookie['sameSite']
 
                     self.driver.add_cookie(clean_cookie)
-                except:
+                except Exception:
                     continue
         return True
 
